@@ -9,8 +9,6 @@
                 <div class="might-like-product-price">{{$product->price}}</div>
             </a>
             @endforeach
-
-
         </div>
     </div>
 </div>
