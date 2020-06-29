@@ -25,7 +25,6 @@
                     href="{{route('shop.index',['category'=>$category->slug])}}">{{$category->name}}</a></li>
             @endforeach
         </ul>
-
     </div> <!-- end sidebar -->
     <div>
         <div class="products-header">
@@ -36,8 +35,6 @@
                     style="font-size:15px">Low to high |</a>
                 <a href="{{route('shop.index',['category'=>$category->category,'sort'=>'high_low'])}}"
                     style="font-size:15px">High to low</a>
-
-
             </div>
         </div>
 
@@ -56,7 +53,7 @@
             <div style="text-align:left; color:gray">No items in this category</div>
             @endforelse
 
-
+            git push origin master
         </div> <!-- end products -->
         <div class="spacer">
             {{-- {{$products->links()}} --}}

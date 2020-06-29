@@ -79,23 +79,19 @@
                             <input type="text" class="form-control" id="cvc" name="cvc" value="">
                         </div>
                     </div> <!-- end half-form -->
-
                     <div class="spacer"></div>
 
                     <button type="submit" class="button-primary full-width">Complete Order</button>
 
-
                 </form>
             </div>
-
-
 
             <div class="checkout-table-container">
                 <h2>Your Order</h2>
 
                 <div class="checkout-table">
                     @foreach (Cart::content() as $item)
-                        
+                    
                    
                     <div class="checkout-table-row">
                         <div class="checkout-table-row-left">
