@@ -1,6 +1,12 @@
 <header>
     <div class="top-nav container">
-        <div class="logo"><a href="/">Laravel Ecommerce</a></div>
+        <div class="logo">
+            <a href="/"><img src="/img/baby.svg" alt="kolica za bebe" style="height:35px; solid;padding:2px;"></a>
+                <a href="/"><h4 style="">Dečija radnja</h4></a>
+            
+        </div>
+
+    
         @if (! request()->is('checkout'))
 
         {{menu('main','partials.menus.main')}}

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel Ecommerce Example</title>
+        <title>Decija radnja</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Montserrat%7CRoboto:300,400,700" rel="stylesheet">
@@ -19,13 +19,16 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo">Laravel E-shop</div>
+                <div class=" ">
+                    <img src="/img/baby.svg" alt="kolica za bebe" style="height: 20%;">
+                    <h2 class="font:bold;font-size:34px; font-uppercase">Dečija radnja<h2> 
+             </div>
              {{menu('main','partials.menus.main')}}
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
                     <h1>Shop</h1>
-                    <p>Includes multiple products, categories, a shopping cart and a checkout system with Stripe integration.</p>
+                    <p>Ukoliko želite najbolje i najkvalitetnije za svoje dete kupujte kod nas.</p>
               
                     <div class="hero-buttons">
                         <a href="#" class="button button-white">Blog Post</a>
@@ -44,7 +47,7 @@
             <div class="container">
                 <h1 class="text-center">Shop</h1>
 
-                <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore vitae nisi, consequuntur illum dolores cumque pariatur quis provident deleniti nesciunt officia est reprehenderit sunt aliquid possimus temporibus enim eum hic.</p>
+                <p class="section-description">Naši proizvodi su isključivo domaće proizvodnje od najkvalitetnijeg 100% pamuka</p>
 
                 <div class="text-center button-container">
                     <a href="#" class="button">Featured</a>
@@ -63,7 +66,7 @@
                 <div class="products text-center">
                     @foreach ($products as $product)
                     <div class="product">
-                        <a href="{{route('shop.show',$product->slug)}}"><img src="{{asset('storage/'.$product->image)}}" alt="product"></a>
+                        <a href="{{route('shop.show',$product->slug)}}"><img src="{{productImage($product->image)}}" style="height:140px;" alt="product"></a>
                         <a href="{{route('shop.show',$product->slug)}}"><div class="product-name">{{$product->name}}</div></a>
                         <div class="product-price">{{$product->presentPrice()}}</div>
                     </div>

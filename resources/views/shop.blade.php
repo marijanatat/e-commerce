@@ -42,7 +42,7 @@
 
             @forelse ($products as $product)
             <div class="product">
-                <a href="{{route('shop.show',$product->slug)}}"><img src="{{asset('storage/'.$product->image)}}"
+                <a href="{{route('shop.show',$product->slug)}}"><img src="{{productImage($product->image)}}" style="height:140px;"
                         alt="product"></a>
                 <a href="{{route('shop.show',$product->slug)}}">
                     <div class="product-name">{{$product->name}}</div>
@@ -53,7 +53,7 @@
             <div style="text-align:left; color:gray">No items in this category</div>
             @endforelse
 
-            git push origin master
+         
         </div> <!-- end products -->
         <div class="spacer">
             {{-- {{$products->links()}} --}}
