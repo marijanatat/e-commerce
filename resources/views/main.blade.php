@@ -19,11 +19,19 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class=" ">
-                    <img src="/img/baby.svg" alt="kolica za bebe" style="height: 20%;">
-                    <h2 class="font:bold;font-size:34px; font-uppercase">Dečija radnja<h2> 
-             </div>
-             {{menu('main','partials.menus.main')}}
+                <div class="top-nav-left">
+                    
+                        <div class="logo-left"> 
+                               <a href="" class="title" style="font-style: bold;color:white;font-size:25px">Decija radnja </a>                   
+                            <img  src="/img/baby.svg" alt="kolica za bebe" style="height: 70%;">                 
+                        </div>
+               
+                       {{menu('main','partials.menus.main')}}
+                  </div>
+
+               <div class="top-nav-right">
+                  @include('partials.menus.main-right') 
+                </div>
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">

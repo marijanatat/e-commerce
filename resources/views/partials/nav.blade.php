@@ -1,15 +1,14 @@
 <header>
     <div class="top-nav container">
-        <div class="logo">
-            <a href="/"><img src="/img/baby.svg" alt="kolica za bebe" style="height:35px; solid;padding:2px;"></a>
-                <a href="/"><h4 style="">Dečija radnja</h4></a>
-            
-        </div>
-
+        <div class="top-nav-left">
+            <div class="logo-left"> 
+                <a href="/" class="title" style="font-style: bold;color:white;font-size:25px">Decija radnja </a>                   
+                 <img  src="/img/baby.svg" alt="kolica za bebe" style="height: 70%;">                 
+            </div>
     
-        @if (! request()->is('checkout'))
-
-        {{menu('main','partials.menus.main')}}
+            @if (! request()->is('checkout'))
+               {{menu('main','partials.menus.main')}}
+       
         {{-- <ul>
             <li><a href="{{route('shop.index')}}">Shop</a></li>
             <li><a href="#">About</a></li>
@@ -24,5 +23,12 @@
                 </a></li>
         </ul> --}}
         @endif
+    </div>
+
+    <div class="top-nav-right">
+        @if (! request()->is('checkout'))
+              @include('partials.menus.main-right')
+        @endif
+    </div>
     </div> <!-- end top-nav -->
 </header>
