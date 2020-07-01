@@ -6,7 +6,7 @@
                  <img  src="/img/baby.svg" alt="kolica za bebe" style="height: 70%;">                 
             </div>
     
-            @if (! request()->is('checkout'))
+            @if (!( request()->is('checkout')||request()->is('guestCheckout')))
                {{menu('main','partials.menus.main')}}
        
         {{-- <ul>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="top-nav-right">
-        @if (! request()->is('checkout'))
+        @if (!( request()->is('checkout')||request()->is('guestCheckout')))
               @include('partials.menus.main-right')
         @endif
     </div>

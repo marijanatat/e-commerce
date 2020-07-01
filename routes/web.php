@@ -11,7 +11,9 @@ Route::post('/cart','CartController@store')->name('cart.store');
 Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/destroy/{product}','CartController@destroy')->name('cart.destroy');
 
-Route::get('/checkout','CheckoutController@index')->name('checkout.index');
+Route::get('/checkout','CheckoutController@index')->name('checkout.index')->middleware('auth');
+
+Route::get('/guestCheckout','CheckoutController@index')->name('guestCheckout.index');
 
 Route::get('empty',function(){
     Cart::destroy();

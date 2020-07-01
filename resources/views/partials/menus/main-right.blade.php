@@ -21,7 +21,9 @@
 
 @endguest
 <li><a href="{{route('cart.index')}}">Cart 
-    <span class="cart-count"><span>{{Cart::instance('default')->count()}}</span> 
+    @if (Cart::instance('default')->count()>0)
+      <span class="cart-count"><span>{{Cart::instance('default')->count()}}</span> 
+    @endif
   </a></li>
     {{-- @foreach($items as $menu_item)
         <li>

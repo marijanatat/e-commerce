@@ -17,8 +17,12 @@
                     <h2>Billing Details</h2>
 
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required>
+                      <label for="email">Email Address</label>
+                        @if (auth()->user())
+                           <input type="email" class="form-control" id="email" name="email" value="{{auth()->user()->email}}" readonly>
+                        @else
+                            <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}" required>
+                        @endif
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -59,26 +63,23 @@
                         <label for="name_on_card">Name on Card</label>
                         <input type="text" class="form-control" id="name_on_card" name="name_on_card" value="">
                     </div>
+
                     <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="">
+                        <label for="card-element">
+                          Credit or debit card
+                        </label>
+                        <div id="card-element">
+                            <input type="number" class="form-control" id="number_of_card" name="number_of_card" value="">
+                        </div>
+
+                        <!-- Used to display form errors -->
+                        <div id="card-errors" role="alert"></div>
                     </div>
 
                     <div class="form-group">
-                        <label for="cc-number">Credit Card Number</label>
-                        <input type="text" class="form-control" id="cc-number" name="cc-number" value="">
+                        <label for="name_on_card">CVC</label>
+                        <input type="number" class="form-control" id="cvcnumber_of_card" name="cvc" value="">
                     </div>
-
-                    <div class="half-form">
-                        <div class="form-group">
-                            <label for="expiry">Expiry</label>
-                            <input type="text" class="form-control" id="expiry" name="expiry" placeholder="MM/DD">
-                        </div>
-                        <div class="form-group">
-                            <label for="cvc">CVC Code</label>
-                            <input type="text" class="form-control" id="cvc" name="cvc" value="">
-                        </div>
-                    </div> <!-- end half-form -->
                     <div class="spacer"></div>
 
                     <button type="submit" class="button-primary full-width">Complete Order</button>
