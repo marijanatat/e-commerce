@@ -8,20 +8,11 @@
                     <div class="blog-posts">
                     
                         <div v-for="post in posts" class="blog-post" :key="post.id" >
-                            <a :href="post.link"><img src="/img/blog1.png" alt="Blog Image"></a>
+                              <a :href="post.link"><blog-image :url="post._links['wp:featuredmedia'][0].href"></blog-image></a>
                             <a :href="post.link"><h2 class="blog-title">{{post.title.rendered}}</h2></a>
                             <div class="blog-description">{{ stripTags(post.excerpt.rendered) }}</div>
                         </div>
-                       <!-- <div class="blog-post" id="blog2">
-                            <a href="#"><img src="/img/blog2.png" alt="Blog Image"></a>
-                            <a href="#"><h2 class="blog-title">Blog Post Title 2</h2></a>
-                            <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
-                        </div>
-                        <div class="blog-post" id="blog3">
-                            <a href="#"><img src="/img/blog3.png" alt="Blog Image"></a>
-                            <a href="#"><h2 class="blog-title">Blog Post Title 3</h2></a>
-                            <div class="blog-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, tenetur numquam ipsam reiciendis.</div>
-                        </div>-->
+        
                     </div>
                 </div> <!-- end container -->
             </div> <!-- end blog-section -->
@@ -30,8 +21,13 @@
 
 <script>
 import sanitizeHtml from 'sanitize-html'
+import BlogImage from './BlogImage'
 
 export default {
+
+    components:{
+        BlogImage,
+        },
    
     created(){
         axios.get('http://localhost/testsite/wp-json/wp/v2/posts?per_page=3')

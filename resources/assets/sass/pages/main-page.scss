@@ -1,10 +1,12 @@
 .featured-section {
     padding: 50px 0;
+    background:$light-light-background;
 
     .products {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-gap: 60px $gutter;
+       
 
         .product-price {
             color: $text-color-light !important;

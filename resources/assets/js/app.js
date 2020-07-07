@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('blog-posts', require('./components/BlogPosts.vue'));
+Vue.component('blog-image', require('./components/BlogImage.vue'));
 
 const app = new Vue({
     el: '#app'
