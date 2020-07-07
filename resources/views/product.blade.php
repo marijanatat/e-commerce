@@ -3,20 +3,36 @@
 @section('title', $product->name)
 
 @section('extra-css')
-
+<link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
 @endsection
 
 @section('content')
 
-    <div class="breadcrumbs">
+    @component('components.breadcrumbs')
+    <a href="/">Home</a>
+    <i class="fa fa-chevron-right breadcrumb-separator"></i>
+    <span><a href="{{ route('shop.index') }}">Shop</a></span>
+    <i class="fa fa-chevron-right breadcrumb-separator"></i>
+    <span>{{ $product->name }}</span>
+@endcomponent
+
         <div class="container">
-            <a href="/">Home</a>
-            <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <a href="{{route('shop.index')}}">Shop</a>
-            <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <span>Macbook Pro</span>
+            @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+            @endif
+    
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
         </div>
-    </div> <!-- end breadcrumbs -->
 
     <div class="product-section container">
         <div>
@@ -42,15 +58,16 @@
 
         <div class="product-section-information">
             <div class="product-section-subtitle">{{$product->details}}</div>
+            <div>{!!$stock!!}</div>
+            <div>{{$product->quantity}}</div>
             <div class="product-section-price">{{$product->presentPrice()}}</div>
 
             <p>
                 {!!$product->description!!}
             </p>
-
-
-            {{-- <a href="#" class="button">Add to Cart</a> --}}
-        <form action="{{route('cart.store')}}" method="POST">
+    
+            @if ($product->quantity>0)
+            <form action="{{route('cart.store')}}" method="POST">
                 {{csrf_field()}}
                 <input type="hidden" name="id" value="{{$product->id}}">
                  <input type="hidden" name="name" value="{{$product->name}}">
@@ -58,7 +75,11 @@
                 
                 <button type="submit" class="button button-plain">Add to cart</button>
 
-            </form>
+             </form>
+            @endif
+
+          
+       
         </div>
     </div> <!-- end product-section -->
 
@@ -80,5 +101,10 @@
         }
     })();
 </script>
+
+<script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    <script src="{{ asset('js/algolia.js') }}"></script>
+
 
 @endsection

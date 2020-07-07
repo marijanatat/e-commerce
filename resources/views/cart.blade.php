@@ -3,18 +3,16 @@
 @section('title', 'Shopping Cart')
 
 @section('extra-css')
-
+    <link rel="stylesheet" href="{{ asset('css/algolia.css') }}">
 @endsection
 
 @section('content')
 
-    <div class="breadcrumbs">
-        <div class="container">
-            <a href="/">Home</a>
-            <i class="fa fa-chevron-right breadcrumb-separator"></i>
-            <span>Shopping Cart</span>
-        </div>
-    </div> <!-- end breadcrumbs -->
+@component('components.breadcrumbs')
+    <a href="#">Home</a>
+    <i class="fa fa-chevron-right breadcrumb-separator"></i>
+    <span>Shopping Cart</span>
+@endcomponent
 
     <div class="cart-section container">
         <div>
@@ -52,7 +50,7 @@
                     <div class="cart-table-row-right">
                       
                         <div>
-                            <select class="quantity" data-id={{$item->rowId}}>
+                            <select class="quantity" data-id="{{$item->rowId}}" data-productQuantity="{{$item->model->quantity}}" >
                                 @for ($i = 1; $i < 10; $i++)                       
                                  <option {{$item->qty==$i?'selected':''}}>{{$i}}</option>   
                                 @endfor                           
@@ -128,6 +126,7 @@
             Array.from(classname).forEach(function(element) {
                 element.addEventListener('change', function() {
                     const id = element.getAttribute('data-id')
+                  
                     const productQuantity = element.getAttribute('data-productQuantity')
                     axios.patch(`/cart/${id}`, {
                         quantity: this.value,
@@ -143,4 +142,9 @@
             })
         })();
     </script>
+
+    <!-- Include AlgoliaSearch JS Client and autocomplete.js library -->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
+    <script src="{{ asset('js/algolia.js') }}"></script>
 @endsection

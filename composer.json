@@ -11,9 +11,11 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "^4.0",
         "gloudemans/shoppingcart": "^2.6",
-        "laravel/framework": "5.6.*",
+        "laravel/framework": "5.7.*",
         "laravel/tinker": "~1.0",
+        "nicolaslopezj/searchable": "^1.13",
         "tcg/voyager": "1.3.2"
+        
     },
     "require-dev": {
         "filp/whoops": "~2.0",

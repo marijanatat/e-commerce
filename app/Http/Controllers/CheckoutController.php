@@ -7,117 +7,143 @@ use Illuminate\Http\Request;
 use App\Product;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\CheckoutRequest;
+use App\Mail\OrderPlaced;
+use App\Order;
+use App\OrderProduct;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 
 class CheckoutController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
          if (Cart::instance('default')->count() == 0) {
             return redirect()->route('shop.index');
         }
-
         if (auth()->user() && request()->is('guestCheckout')) {
                 return redirect()->route('checkout.index');
         }
      
         // return view('checkout')->with([         
-        //     'discount' => getNumbers()->get('discount'),
-        //     'newSubtotal' => getNumbers()->get('newSubtotal'),
-        //     'newTax' => getNumbers()->get('newTax'),
+      
+        //     'newSubtotal' => $this->getNumbers()->get('newSubtotal'),
+        //     'newTax' => $this->getNumbers()->get('newTax'),
         //     'newTotal' => getNumbers()->get('newTotal'),
         // ]);  
         return view('checkout');
      }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(CheckoutRequest $request)
     {
+
+        if($this->productsAreNoLongerAvailable()){
+            return back()->withErrors('Item is no longer available');
+        }
         $contents = Cart::content()->map(function ($item) {
             return $item->model->slug.', '.$item->qty;
-        })->values()->toJson();
+             })->values()->toJson();
+        $order=$this->addToOrdersTable($request,null);
+        Mail::send(new OrderPlaced($order));
+        //Mail::to($request->email)->send(new OrderPlaced);
+        $this->decreaseQuantities();
+        //Cart::instance('default')->destroy();
+        return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
 
-        try {
-            $charge = Stripe::charges()->create([
-                'amount' => getNumbers()->get('newTotal') / 100,
-                'currency' => 'CAD',
-             
-                'description' => 'Order',
-                'receipt_email' => $request->email,
-                'metadata' => [
-                    'contents' => $contents,
-                    'quantity' => Cart::instance('default')->count(),
-                    'discount' => collect(session()->get('coupon'))->toJson(),
-                ],
+       
+    }
+    protected function productsAreNoLongerAvailable()
+    {
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->model->id);
+            if ($product->quantity < $item->qty) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function addToOrdersTable($request,$error){
+
+        $order=Order::create([
+               'user_id'=>auth()->user()? auth()->user()->id : null,
+               'billing_email' => $request->email,
+               'billing_name' => $request->name,
+               'billing_address' => $request->address,
+               'billing_city' => $request->city,
+               'billing_province' => $request->province,
+               'billing_postalcode' => $request->postalcode,
+               'billing_phone' => $request->phone,
+               'billing_name_on_card' => $request->name_on_card,
+                'billing_subtotal' =>$this->getNumbers()->get('newSubtotal'),
+                'billing_tax' => $this->getNumbers()->get('newTax'),
+                'billing_total'=>$this->getNumbers()->get('newTotal'),
+               'error' => $error,
             ]);
+    
+            foreach (Cart::content() as $item) {
+                OrderProduct::create([
+                    'order_id'=>$order->id,
+                    'product_id'=>$item->model->id,
+                    'quantity'=>$item->qty
+                ]);
+            }
+            return $order;
 
-        } catch (CardErrorException $e) {
-            // $this->addToOrdersTables($request, $e->getMessage());
-            return back()->withErrors('Error! ' . $e->getMessage());
+    }
+
+    protected function decreaseQuantities(){
+        foreach(Cart::content() as $item){
+            $product=Product::find($item->model->id);
+            $product->update(['quantity'=>$product->quantity-$item->qty]);
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    private function getNumbers()
+    {
+        $tax=number_format((float)config('cart.tax')/100);  
+        // $tax = floatval(implode(explode(',',$tax1))); 
+        //$newsubTotal= number_format((float)Cart::subtotal(), 2);
+         $newsubTotal=Cart::subtotal(2,'.','');
+        $newTax=$newsubTotal * $tax;
+        $newTotal=$newsubTotal * (1 + $tax);
+
+        return collect([
+            'tax'=>$tax,
+            'newSubtotal'=>$newsubTotal,
+            'newTotal'=>$newTotal,
+            'newTax'=>$newTax,
+        ]);
+    }
+
+  
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy($id)
     {
         //

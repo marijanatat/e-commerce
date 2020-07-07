@@ -75,10 +75,17 @@ class ShopController extends Controller
     {
         $product=Product::where('slug',$slug)->firstOrFail();
         $mightAlsoLike=Product::where('slug','!=',$slug)->mightAlsoLike()->get();
-        // return view('product',[
-        //     'product'=>$product,
-        //     'mightAlsoLike'=>$mightAlsoLike]);
-        return view('product',compact('product','mightAlsoLike'));
+        
+// postavljena vrednost stock_threshold u voyageru na 5
+        if($product->quantity>setting('site.stock_threshold')){
+            $stock='<span class="badge badge-success">In stock</div>';
+        }else if($product->quantity<=setting('site.stock_threshold') && $product->quantity>0){
+            $stock='<div class="badge badge-warning">Low stock</div>';
+        }else {
+            $stock='<div class="badge badge-danger">Not available</div>';
+        }
+        
+        return view('product',compact('product','mightAlsoLike','stock'));
     }
 
     // public function show( Product $product)
@@ -119,5 +126,25 @@ class ShopController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query'=>'required|min:3'
+        ]);
+        $query=$request->input('query');
+      //  $products=Product::where('name','like',"%$query%")->get();
+        //ukoliko zelimo paginaciju umesto get ide paginate
+
+
+         $products=Product::where('name','like',"%$query%")
+                         ->orwhere('description','like',"%$query%")
+                         ->orwhere('details','like',"%$query%")  
+                      ->paginate(10);
+
+        //uz paket use Nicolaslopezj\Searchable\SearchableTrait;
+       // $products=Product::search($query)->paginate(10);
+        return view('search-results ')->with('products',$products);
     }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Mail;
 
 Route::get('/', 'ProductController@index')->name('home');
 Route::get('/shop','ShopController@index')->name('shop.index');
@@ -12,8 +13,10 @@ Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/destroy/{product}','CartController@destroy')->name('cart.destroy');
 
 Route::get('/checkout','CheckoutController@index')->name('checkout.index')->middleware('auth');
+Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
 
 Route::get('/guestCheckout','CheckoutController@index')->name('guestCheckout.index');
+Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 Route::get('empty',function(){
     Cart::destroy();
@@ -27,3 +30,6 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/search', 'ShopController@search')->name('search');
+

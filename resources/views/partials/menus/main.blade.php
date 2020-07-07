@@ -13,16 +13,3 @@
     @endforeach
 </ul>
 
-{{-- <ul>
-    <li><a href="{{route('shop.index')}}">Shop</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
-    <li>
-        <a href="{{route('cart.index')}}">Cart <span class="cart-count">
-            @if (Cart::instance('default')->count()>0)
-            <span>{{Cart::instance('default')->count()}}</span>                
-            @endif
-           
-        </span>
-        </a></li>
-</ul> --}}

@@ -20,6 +20,8 @@ class ProductsTableSeeder extends Seeder
             'details' => [13,14,15][array_rand([13,14,15])]. 'inch, ' .[1,2,3][array_rand([1,2,3])]. 'TB SSD,32GB RAM ',
             'price' => rand(30000,200000),
             'description' => 'Lorem'. $i.' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
+            'image' => 'products/dummy/laptop-'.$i.'.jpg',
+                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
         ])->categories()->attach(1);
         }
         
@@ -33,6 +35,8 @@ class ProductsTableSeeder extends Seeder
                 'details' => [24,25,27][array_rand([24,25,27])]. 'inch, ' .[1,2,3][array_rand([1,2,3])]. 'TB SSD,32GB RAM ',
                 'price' => rand(20000,200000),
                 'description' => 'Lorem'. $i.' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
+                'image' => 'products/dummy/desktop-'.$i.'.jpg',
+                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
             ])>categories()->attach(2);
             }
 
@@ -43,6 +47,8 @@ class ProductsTableSeeder extends Seeder
                     'details' => [16,32,64][array_rand([16,32,64])]. 'inch, ' .[7,8,9][array_rand([7,8,9])]. 'TB SSD,32GB RAM ',
                     'price' => rand(5000,200000),
                     'description' => 'Lorem'. $i.' ipsum dolor sit amet, consectetur adipisicing elit. Ipsum temporibus iusto ipsa, asperiores voluptas unde aspernatur praesentium in? Aliquam, dolore!',
+                    'image' => 'products/dummy/phone-'.$i.'.jpg',
+                'images' => '["products\/dummy\/laptop-2.jpg","products\/dummy\/laptop-3.jpg","products\/dummy\/laptop-4.jpg"]',
                 ])>categories()->attach(3);
                 }
 

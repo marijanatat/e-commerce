@@ -1,0 +1,63 @@
+.auth-pages{
+    margin:100px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap:100px;
+    min-height: 60vh;
+
+    input{
+        border:1px solid $text-color-light;
+        padding: 16px 10px;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    input[type="checkbox"]{
+        width: auto ;
+
+    }
+    .login-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+    }
+
+    .auth-button{
+        background: $text-color;
+        color: $white;
+        width: auto;
+        border-radius: 5px;
+        padding: 12px 40px;
+        font-size: 18px;
+
+    
+        &:hover{
+            background: lighten($color:$text-color, $amount: 30%);
+            color:black;
+
+        }
+
+    }
+
+    .auth-right {
+        border-left: 1px solid $separator-color;
+        padding-left: 100px;
+
+    }
+
+    .auth-button-right{
+        color: $text-color;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 12px 40px;
+
+        &:hover{
+             background: $text-color;
+             color: white;
+        }
+
+    }
+}
