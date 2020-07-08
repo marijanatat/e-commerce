@@ -33,3 +33,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/search', 'ShopController@search')->name('search');
 
+// Route::middleware('auth')->group(function(){
+//     Route::get('/my-profile', 'UsersController@edit')->name('users.edit')->middleware('auth');
+// });
+
+Route::get('/my-profile', 'UsersController@edit')->name('users.edit')->middleware('auth');
+Route::patch('/my-profile', 'UsersController@update')->name('users.update')->middleware('auth');
+Route::get('/my-orders', 'OrdersController@index')->name('orders.index')->middleware('auth');
+Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show')->middleware('auth');
+

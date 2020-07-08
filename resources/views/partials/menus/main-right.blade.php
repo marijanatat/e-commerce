@@ -7,6 +7,10 @@
 
 @else
 
+
+<li>
+    <a href="{{ route('users.edit') }}">My Account</a>
+</li>
 <li>
     <a class="dropdown-item" href="{{ route('logout') }}"
     onclick="event.preventDefault();

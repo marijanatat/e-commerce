@@ -1,6 +1,8 @@
 <?php
 
- function presentPrice($price)
+use Carbon\Carbon;
+
+function presentPrice($price)
     {
         return number_format( $price).' DIN';
     }
@@ -9,5 +11,10 @@
     {
         return $path && file_exists('storage/'.$path) ? asset('storage/'.$path) : asset('img/not-found.jpg');
     }
+
+    function presentDate($date)
+{
+    return Carbon::parse($date)->format('M d, Y');
+}
 
     
