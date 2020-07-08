@@ -23,7 +23,7 @@
                     <div class="top-nav-left">
                         
                             <div class="logo-left"> 
-                                   <a href="" class="title" style="font-style: bold;color:white;font-size:25px;margin-right:15px">Decija radnja </a>                   
+                                   <a href="" class="title" style="font-style: bold;color:white;font-size:25px;margin-right:15px">Dečija radnja </a>                   
                                 <img  src="/img/baby.svg" alt="kolica za bebe" style="height: 70%">                 
                             </div>
                    
@@ -37,12 +37,12 @@
                 <div class="hero container">
                     <div class="hero-copy">
                         <h1>Shop</h1>
-                        <p>Ukoliko želite najbolje i najkvalitetnije za svoje dete kupujte kod nas.</p>
+                        <p style="font-size:30px ">Ukoliko želite najbolje i najkvalitetnije za svoje dete kupujte kod nas.</p>
                   
-                        <div class="hero-buttons">
+                        {{-- <div class="hero-buttons">
                             <a href="http://localhost/testsite/" class="button button-white">Blog Post</a>
                             <a href="https://github.com/marijanatat/e-commerce" class="button button-white">GitHub</a>
-                        </div>
+                        </div> --}}
                     </div> <!-- end hero-copy -->
     
                     <div class="hero-image">
@@ -57,11 +57,11 @@
                 <div class="container">
                     <h1 class="text-center">Shop</h1>
     
-                    <p class="section-description text-center ">Naši proizvodi su isključivo domaće proizvodnje od najkvalitetnijeg 100% pamuka</p>
+                    <p class="section-description text-center " style="font-size:30px ">Naši proizvodi su isključivo domaće proizvodnje od najkvalitetnijeg 100% pamuka</p>
     
                     <div class="text-center button-container">
-                        <a href="#" class="button">Featured</a>
-                        <a href="#" class="button">On Sale</a>
+                        {{-- <a href="#" class="button">Featured</a>
+                        <a href="#" class="button">On Sale</a> --}}
                     </div>
     
                     {{-- <div class="tabs">

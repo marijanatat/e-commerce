@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db0b5e3e7a421732d06cf35fc823bdbd",
+    "content-hash": "c858dc1d60b5f6a67f43dee6e5338d32",
     "packages": [
         {
             "name": "arrilot/laravel-widgets",
@@ -67,6 +67,50 @@
                 "widgets"
             ],
             "time": "2019-03-25T14:20:55+00:00"
+        },
+        {
+            "name": "braintree/braintree_php",
+            "version": "5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/braintree/braintree_php.git",
+                "reference": "6cf3447ecd0303caa6f2d4f22b653dc5c71b4589"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/braintree/braintree_php/zipball/6cf3447ecd0303caa6f2d4f22b653dc5c71b4589",
+                "reference": "6cf3447ecd0303caa6f2d4f22b653dc5c71b4589",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-dom": "*",
+                "ext-hash": "*",
+                "ext-openssl": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Braintree\\": "lib/Braintree"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Braintree",
+                    "homepage": "https://www.braintreepayments.com"
+                }
+            ],
+            "description": "Braintree PHP Client Library",
+            "time": "2020-06-15T19:02:23+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -951,6 +995,56 @@
                 "parser"
             ],
             "time": "2019-12-30T22:54:17+00:00"
+        },
+        {
+            "name": "farhanwazir/laravelgooglemaps",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/farhanwazir/laravelgooglemaps.git",
+                "reference": "882a1422b91c9f4735ae7188ed897965d253822a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/farhanwazir/laravelgooglemaps/zipball/882a1422b91c9f4735ae7188ed897965d253822a",
+                "reference": "882a1422b91c9f4735ae7188ed897965d253822a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FarhanWazir\\GoogleMaps\\": "src/FarhanWazir/GoogleMaps/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Farhan Wazir",
+                    "email": "seejee1@gmail.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "Laravel Google Map package for 5.x. You can use all google map features in laravel.",
+            "keywords": [
+                "gmap",
+                "google",
+                "googlemap",
+                "laravel",
+                "map"
+            ],
+            "time": "2019-04-23T22:55:05+00:00"
         },
         {
             "name": "fideloper/proxy",
@@ -1878,7 +1972,6 @@
             ],
             "time": "2018-12-04T12:57:08+00:00"
         },
-      
         {
             "name": "laravel/slack-notification-channel",
             "version": "v1.0.3",
@@ -6728,7 +6821,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "farhanwazir/laravelgooglemaps": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -1,5 +1,6 @@
 <?php
 
+use FarhanWazir\GoogleMaps\GMaps;
 use Illuminate\Support\Facades\Route;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Mail;
@@ -42,3 +43,31 @@ Route::patch('/my-profile', 'UsersController@update')->name('users.update')->mid
 Route::get('/my-orders', 'OrdersController@index')->name('orders.index')->middleware('auth');
 Route::get('/my-orders/{order}', 'OrdersController@show')->name('orders.show')->middleware('auth');
 
+Route::post('/paypal-checkout', 'CheckoutController@paypalCheckout')->name('checkout.paypal');
+//Route::view('/about','about');
+Route::get('/map', 'MapController@index');
+
+Route::get('/about', function(){
+   
+    $config['center'] = 'Somborska 38,Odžaci, Serbia';
+    $config['zoom'] = '10';
+    $config['map_heigh'] = '100px';
+    $config['scrollwheel'] = false;
+
+
+    $gmap = new GMaps();
+    $gmap->initialize($config);
+
+    // $marker['position']='Somborska,Odžaci';
+    // $marker['infowindow_content']='Somborska 38';
+    // GMaps::add_marker($marker);
+
+
+    //$map = GMaps::create_map();
+    $map = $gmap->create_map();
+
+    // echo $map['js'];
+    // echo $map['html'];
+
+    return view('about',compact('map'));
+});

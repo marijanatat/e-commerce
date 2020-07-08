@@ -35,4 +35,19 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'braintree' => [
+        'model' => App\User::class, //model used to processs subscriptions
+        'environment' => env('BRAINTREE_ENV'),
+        'merchant_id' => env('BRAINTREE_MERCHANT_ID'),
+        'public_key' => env('BRAINTREE_PUBLIC_KEY'),
+        'private_key' => env('BRAINTREE_PRIVATE_KEY'),
+],
+    
+    // 'braintree' => [
+    //     'environment' => env('BT_ENVIRONMENT', 'sandbox'),
+    //     'merchantId' => env('BT_MERCHANT_ID'),
+    //     'publicKey' => env('BT_PUBLIC_KEY'),
+    //     'privateKey' => env('BT_PRIVATE_KEY'),
+    // ],
+
 ];
